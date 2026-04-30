@@ -1,30 +1,26 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:aula07/main.dart';
+import 'package:flutter_problematico_catalog/state/product_list_state.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  test('ProductListState.idle() inicializa com status idle e lista vazia', () {
+    final state = ProductListState.idle();
+    expect(state.status, ProductListStatus.idle);
+    expect(state.products, isEmpty);
+    expect(state.message, isNull);
+  });
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+  test('copyWith preserva campos não alterados', () {
+    final state = ProductListState.idle().copyWith(
+      status: ProductListStatus.loading,
+    );
+    expect(state.status, ProductListStatus.loading);
+    expect(state.products, isEmpty);
+  });
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+  test('clearMessage apaga a mensagem existente', () {
+    final withMsg = ProductListState.idle().copyWith(message: 'teste');
+    final cleared = withMsg.copyWith(clearMessage: true);
+    expect(cleared.message, isNull);
   });
 }

@@ -12,7 +12,15 @@ Projeto didático propositalmente ruim para identificação e correção de prob
 ## API usada
 
 Este projeto consome a API pública DummyJSON:
-- `GET https://dummyjson.com/products`
+- `GET https://dummyjson.com/products?limit=30`
+
+## Dependências
+
+```yaml
+http: ^1.2.1
+shared_preferences: ^2.3.0   # cache persistente em disco
+cached_network_image: ^3.4.0 # cache de imagens
+```
 
 ## Como executar
 
@@ -20,6 +28,20 @@ Este projeto consome a API pública DummyJSON:
 flutter pub get
 flutter run
 ```
+
+## Documentação da refatoração
+
+A análise completa dos problemas encontrados, as mudanças realizadas e a justificativa técnica de cada decisão estão em **[ANALISE.md](ANALISE.md)**.
+
+O `ANALISE.md` cobre:
+1. Problemas identificados no projeto original (11 problemas mapeados)
+2. Mudanças realizadas (com localização e justificativa)
+3. Estratégia de cache adotada (Stale-While-Revalidate)
+4. Modelagem de estados explícitos (6 estados)
+5. Tabela comparativa Antes vs. Depois
+6. Trade-offs e limitações reconhecidos
+7. Integrantes do Grupo 2
+
 ---
 
 # Atividade Prática: Análise e Evolução de Aplicação Flutter
@@ -38,7 +60,7 @@ A partir dele, deve-se observar o comportamento da aplicação, analisar suas li
 
 O foco da atividade está em compreender que a qualidade de uma aplicação não depende apenas de seu funcionamento correto, mas também de sua organização interna e de sua forma de responder às interações do usuário.
 
-Assim, a proposta não se limita a fazer o sistema “funcionar”, mas a examinar **como ele se comporta**, quais decisões prejudicam sua qualidade e quais mudanças podem torná-lo mais adequado do ponto de vista arquitetural e da experiência de uso.
+Assim, a proposta não se limita a fazer o sistema "funcionar", mas a examinar **como ele se comporta**, quais decisões prejudicam sua qualidade e quais mudanças podem torná-lo mais adequado do ponto de vista arquitetural e da experiência de uso.
 
 ## Proposta de Trabalho
 
@@ -66,4 +88,3 @@ A análise da atividade deve considerar principalmente a capacidade de:
 * explicar tecnicamente as mudanças realizadas.
 
 > Esta atividade não se limita à implementação de código. Seu propósito é desenvolver análise, diagnóstico, evolução arquitetural e argumentação técnica sobre decisões de projeto em aplicações interativas.
-
